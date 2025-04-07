@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON DeObfuscator</title>
+<style>
+body {
+background-color: #111;
+color: #806040;
+}
+.code {
+background-color: #000;
+color: #205080;
+font-family: Monospace;
+}
+</style>
+<script src="text.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<h1><div id="js" class="code">Enable JavaScript</div>
+JSON DeObfuscator</h1>
+<h2>Input</h2>
+<input class="code" type="file" id="files" multiple webkitdirectory />
+<hr /><h3 id="state"></h3>
+<button onclick="main();" class="code">DeObfuscate</button><br /><br />
+<script>
+const t=e=>document.getElementById(e);
+t('js').remove();
+async function main() {
+const files = t('files').files;
+if (!files.length) {
+t('state').textContent = 'Provide Files';
+return;
+}
+t('state').textContent = 'Working...'
+const zip = new JSZip();
+for (const file of files) {
+try {
+let txt = await file.text();
+r=(y,j)=>{
+txt = txt.replaceAll(j,y);
+txt = txt.replaceAll(j.toUpperCase(),y);
+}
+r('u','\\u0075');
+r('0','\\u0030');
+r('1','\\u0031');
+r('2','\\u0032');
+r('3','\\u0033');
+r('4','\\u0034');
+r('5','\\u0035');
+r('6','\\u0036');
+r('7','\\u0037');
+r('8','\\u0038');
+r('9','\\u0039');
+r('A','\\u0041');
+r('B','\\u0042');
+r('C','\\u0043');
+r('D','\\u0044');
+r('E','\\u0045');
+r('F','\\u0046');
+r('G','\\u0047');
+r('H','\\u0048');
+r('I','\\u0049');
+r('J','\\u004A');
+r('K','\\u004B');
+r('L','\\u004C');
+r('M','\\u004D');
+r('N','\\u004E');
+r('O','\\u004F');
+r('P','\\u0050');
+r('Q','\\u0051');
+r('R','\\u0052');
+r('S','\\u0053');
+r('T','\\u0054');
+r('U','\\u0055');
+r('V','\\u0056');
+r('W','\\u0057');
+r('X','\\u0058');
+r('Y','\\u0059');
+r('Z','\\u005A');
+r('a','\\u0061');
+r('b','\\u0062');
+r('c','\\u0063');
+r('d','\\u0064');
+r('e','\\u0065');
+r('f','\\u0066');
+r('g','\\u0067');
+r('h','\\u0068');
+r('i','\\u0069');
+r('j','\\u006A');
+r('k','\\u006B');
+r('l','\\u006C');
+r('m','\\u006D');
+r('n','\\u006E');
+r('o','\\u006F');
+r('p','\\u0070');
+r('q','\\u0071');
+r('r','\\u0072');
+r('s','\\u0073');
+r('t','\\u0074');
+r('v','\\u0076');
+r('w','\\u0077');
+r('x','\\u0078');
+r('y','\\u0079');
+r('z','\\u007A');
+r(' ','\\u0020');
+r('\\t','\\u0009');
+r('\\n','\\u000A');
+r('\\r','\\u000D');
+r('\\f','\\u000C');
+r('\\v','\\u000B');
+r('!','\\u0021');
+r('"','\\u0022');
+r('#','\\u0023');
+r('$','\\u0024');
+r('%','\\u0025');
+r('&','\\u0026');
+r("'","\\u0027");
+r('(','\\u0028');
+r(')','\\u0029');
+r('*','\\u002A');
+r('+','\\u002B');
+r(',','\\u002C');
+r('-','\\u002D');
+r('.','\\u002E');
+r('/','\\u002F');
+r(':','\\u003A');
+r(';','\\u003B');
+r('<','\\u003C');
+r('=','\\u003D');
+r('>','\\u003E');
+r('?','\\u003F');
+r('@','\\u0040');
+r('[','\\u005B');
+r('\\\\','\\u005C');
+r(']','\\u005D');
+r('^','\\u005E');
+r('_','\\u005F');
+r('`','\\u0060');
+r('{','\\u007B');
+r('|','\\u007C');
+r('}','\\u007D');
+r('~','\\u007E');
+zip.file(file.webkitRelativePath, txt);
+continue;
+} catch (e) {}
+}
+const content = await zip.generateAsync({ type: 'blob'});
+const link = document.createElement('a');
+link.href = URL.createObjectURL(content);
+link.download = "DeObfuscatedJSON.zip";
+link.click();
+link.textContent = "Click here to download if not started automatically";
+document.body.appendChild(link);
+t('state').textContent = "Success!";
+}
+</script>
+</body>
+</html>
